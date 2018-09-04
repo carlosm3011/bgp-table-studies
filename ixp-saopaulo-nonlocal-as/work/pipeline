@@ -1,0 +1,10 @@
+// pipeline
+digraph {
+	ris_file_fetcher [shape=rectangle]
+	table_analysis [shape=rectangle]
+	add_cc_data [shape=rectangle]
+	concatenator [shape=rectangle]
+	ris_file_fetcher -> table_analysis
+	table_analysis -> add_cc_data
+	add_cc_data -> concatenator
+}
