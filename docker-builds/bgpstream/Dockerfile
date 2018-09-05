@@ -5,7 +5,7 @@ RUN apt-get -y update && apt-get -y install build-essential graphviz zlib1g-dev 
 # RUN apt-get -y install python python-pip vim-tiny wget less
 # RUN pip install ipwhois
 RUN pip install fire click ipaddr 
-# RUN pip install consecution
+RUN pip install consecution
 COPY download/* /root/
 
 # Compile dependency WANDIO
