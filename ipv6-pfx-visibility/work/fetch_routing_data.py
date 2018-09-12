@@ -14,7 +14,7 @@ def dateToEpoch(wdate):
 def shouldIProcessFile(wfile):
 	try:
 		fstat = os.stat(wfile)
-		if fstat.st_size > 100000 :
+		if fstat.st_size > 10000 :
 			return False
 		else:		
 			return True
@@ -36,6 +36,17 @@ class fetchNode(Node):
 			print "File %s already exists" % (fname)
 		self.push(item)
 # end fetchnode
+
+
+class extractFields(Node):
+	def process(self,item):
+		# head -50 ipv6_lacnic_visible_20170101.csv  | awk -F'|' '{print $6,"\t",$8,"\t"101}' | sort -u | wc -l
+		ifname = "ipv6_lacnic_visible_%s.csv" % (item)
+		ofname = "ipv6_lacnic_stage2_%s.csv" % (item)
+		if shouldIProcessFile(ofname):
+			cmd = ""
+		pass
+# end class extractfields
 
 if __name__ == "__main__":
 	pipe = Pipeline(fetchNode('ris'))
