@@ -6,6 +6,6 @@ build: ./docker-builds/bgpstream/Dockerfile
 shell: build
 	docker run --hostname ipv6visibility  \
 			-v $$(pwd)/ipv6-pfx-visibility/work:/work \
-			-v $$(pwd)/scripts:/scripts:ro \
+			-v $$(pwd)/ipv6-pfx-visibility/scripts:/scripts:ro \
 			-v $$(pwd)/data:/data:ro  -it bgp_stream:latest /bin/bash || /bin/true
 
