@@ -44,12 +44,17 @@ class extractFields(Node):
 		ifname = "ipv6_lacnic_visible_%s.csv" % (item)
 		ofname = "ipv6_lacnic_stage2_%s.csv" % (item)
 		if shouldIProcessFile(ofname):
-			cmd = ""
+			cmd = """awk -F'|' '{{print $6,"\t",$8,"\t"101}}' {0} | sort -u > {1}""".format(ifname, ofname)
+			print "Running %s" % (cmd)
+			system(cmd)
+		else:
+			print "File %s already exists" % (fname)
+	
 		pass
 # end class extractfields
 
 if __name__ == "__main__":
-	pipe = Pipeline(fetchNode('ris'))
+	pipe = Pipeline(fetchNode('get ris data') | extractFields('extract fields'))
 	print pipe
 	# pipe.consume(['20130320', '20130327', '20130401'])
 	print "Reading targets from file targets.txt"
