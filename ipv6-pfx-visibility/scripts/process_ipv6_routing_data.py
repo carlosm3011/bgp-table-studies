@@ -28,9 +28,16 @@ def shouldIProcessFile(wfile):
 		return True
 # end checkFileStatus
 
+class initNode(Node):
+	def process(self, item):
+		self.push(item)
+
 class fetchNode(Node):
 	def process(self,item):
 		# print item
+		# last_item_digit = item[-1:]
+		if self.name == "even" and (int(item) % 2 != 0):
+			return
 		fname = "/work/ipv6_lacnic_visible_%s.csv" % (item)
 		if shouldIProcessFile(fname):
 			tstart = dateToEpoch(item)
@@ -60,7 +67,7 @@ class extractFields(Node):
 # end class extractfields
 
 def main(targets):
-	pipe = Pipeline(fetchNode('get ris data') | extractFields('extract fields'))
+	pipe = Pipeline( initNode('init') | [fetchNode('even'), fetchNode('odd')] | extractFields('extract fields'))
 	print pipe
 	# pipe.consume(['20130320', '20130327', '20130401'])
 	print "Reading targets from file {}".format(targets)
