@@ -34,7 +34,7 @@ class initNode(Node):
 
 class fetchNode(Node):
 	def process(self,item):
-		fname = "/work/ipv6_lacnic_visible_%s.csv" % (item)
+		fname = "/work/ipv6_lacnic_visible_st1_%s.csv" % (item)
 		if shouldIProcessFile(fname):
 			tstart = dateToEpoch(item)
 			tend = tstart + 86400
@@ -52,14 +52,13 @@ class extractFields(Node):
 	def process(self,item):
 		# head -50 ipv6_lacnic_visible_20170101.csv  | awk -F'|' '{print $6,"\t",$8,"\t"101}' | sort -u | wc -l
 		ifname = "/work/ipv6_lacnic_visible_%s.csv" % (item)
-		ofname = "/work/ipv6_lacnic_stage2_%s.csv" % (item)
+		ofname = "/work/ipv6_lacnic_visible_st2_%s.csv" % (item)
 		if shouldIProcessFile(ofname):
-			cmd = """awk -F'|' '{{print $6,"\t",$8,"\t"101}}' {0} | sort -u > {1}""".format(ifname, ofname)
+			cmd = """awk -F'|' '{{print $11,"\t",$8,"\t"999}}' {0} | sort -u > {1}""".format(ifname, ofname)
 			print "Running %s" % (cmd)
 			system(cmd)
 		else:
 			print "File %s already exists" % (ofname)
-	
 		pass
 # end class extractfields
 
