@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
-# RUN echo 'Acquire::http::Proxy "http://trantor.labs.lacnic.net:9999";' >> /etc/apt/apt.conf.d/00aptproxy
-RUN apt-get -y update && apt-get -y install build-essential graphviz zlib1g-dev libbz2-dev libcurl4-openssl-dev python python-pip vim-tiny wget less pv
+RUN echo 'Acquire::http::Proxy "http://trantor.labs.lacnic.net:9999";' >> /etc/apt/apt.conf.d/00aptproxy
+RUN apt-get -y update && apt-get -y install build-essential graphviz zlib1g-dev libbz2-dev libcurl4-openssl-dev python python-pip vim-tiny wget less pv time
 # RUN apt-get -y install zlib1g-dev libbz2-dev libcurl4-openssl-dev python python-pip vim-tiny wget less
 # RUN apt-get -y install python python-pip vim-tiny wget less
 # RUN pip install ipwhois
