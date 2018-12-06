@@ -42,7 +42,8 @@ class fetchNode(Node):
 		if shouldIProcessFile(fname):
 			tstart = dateToEpoch(item)
 			tend = tstart + 86400
-			cmd =  "bgpreader -d broker -w {0},{1} -p ris -c rrc00 -t ribs -k 2001:1200::/23 -k 2800::/12 | pv -pt > {2}".format(tstart,tend,fname) 
+			# cmd =  "time bgpreader -d broker -w {0},{1} -p ris -c rrc00 -t ribs -k 2001:1200::/23 -k 2800::/12 | pv -pt > {2}".format(tstart,tend,fname) 
+			cmd =  "time bgpreader -d broker -w {0},{1} -p ris -c rrc00 -t ribs -k 2001:1200::/23 -k 2800::/12 | tee {2}".format(tstart,tend,fname) 
 			print "Running %s" % (cmd)
 			system(cmd)
 		else:
