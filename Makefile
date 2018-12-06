@@ -14,7 +14,7 @@ ipv6pfxvis: build
 			-v $$(pwd)/data:/data:ro  -it bgp_stream:latest /bin/bash || /bin/true
 
 ipv6rttoday: build
-	date -d "8 day ago" '+%Y%m%d' > $$(pwd)/ipv6-pfx-visibility/work/target_today.txt	
+	date -d "30 day ago" '+%Y%m%d' > $$(pwd)/ipv6-pfx-visibility/work/target_today.txt	
 	docker run --hostname ipv6visibility  \
 			-v $$(pwd)/ipv6-pfx-visibility/work:/work \
 			-v $$(pwd)/ipv6-pfx-visibility/scripts:/scripts:ro \
